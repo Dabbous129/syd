@@ -1,331 +1,2305 @@
+/* =========================================================
+   MUSA AL-SADR
+   PREMIUM VANILLA JAVASCRIPT
+========================================================= */
+
+"use strict";
+
+
+/* =========================================================
+   DOM READY
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ===============================
-  // Theme Toggle (uses themeToggle id from your HTML)
-  // ===============================
-  const themeToggle = document.getElementById("themeToggle");
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      // toggle light theme class (your CSS defines .theme-light)
-      document.body.classList.toggle("theme-light");
-    });
-  }
 
-  // ===============================
-  // Language Toggle + i18n
-  // ===============================
-  const langToggle = document.getElementById("langToggle");
+    /* =====================================================
+       ELEMENTS
+    ====================================================== */
 
-  // Translation data (merged and extended with books)
-  const i18n = {
-    en: {
-      "nav.about": "About",
-      "nav.life": "Life",
-      "nav.legacy": "Legacy",
-      "nav.contact": "Contact",
-      "nav.gallery": "Gallery",
-      "nav.timeline": "Timeline",
-      "nav.resources": "Resources",
-      "nav.quotes": "Quotes",
+    const body =
+        document.body;
 
-      "hero.title": "Imam Sayyid Musa al-Sadr",
-      "hero.subtitle": "A visionary leader, reformer, and thinker.",
+    const html =
+        document.documentElement;
 
-      "about.title": "About",
-      "about.p1": "Sayyid Musa al-Sadr (1928–unknown) was a Lebanese-Iranian Shi'a cleric and public intellectual. He moved to Lebanon in 1959 and became a leading voice for national unity, education, and social development, especially in the historically marginalized south.",
-      "about.p2": "He led community institutions, promoted interfaith dialogue, and strengthened the role of the state in ensuring dignity and opportunities for all citizens.",
-      "about.p3": "His unexplained disappearance in Libya on 31 August 1978, with Sheikh Mohammad Yaacoub and journalist Abbas Badreddine, remains a central unresolved issue in Lebanon’s modern history.",
-      "about.text": "Sayyid Musa al-Sadr was a prominent Lebanese-Iranian Shi'a cleric, reformer, and political leader who played a key role in Lebanon's modern history.",
-      "about.card1.t": "Scholar & Reformer",
-      "about.card1.d": "Blending religious scholarship with civic work: education, healthcare, and social solidarity.",
-      "about.card2.t": "Bridge Builder",
-      "about.card2.d": "Encouraged dialogue among Lebanon’s communities to foster national unity.",
-      "about.card3.t": "Unanswered Question",
-      "about.card3.d": "His fate remains unknown; the search for truth continues.",
+    const header =
+        document.getElementById("siteHeader");
 
-      "life.title": "Life",
-      "life.text": "He was born in Qom, Iran in 1928 and moved to Lebanon in 1959, where he became an influential figure advocating for social justice and unity.",
+    const navToggle =
+        document.getElementById("navToggle");
 
-      "legacy.title": "Legacy",
-      "legacy.text": "His mysterious disappearance in 1978 in Libya remains one of the greatest unsolved cases in the Middle East, yet his legacy continues to inspire.",
-      "legacy.i1": "A model of faith engaging public life: dignity, education, social justice.",
-      "legacy.i2": "Institutions and movements that continue to shape civic engagement.",
-      "legacy.i3": "A lasting call for dialogue and responsible citizenship.",
-      "legacy.quote": "Man is the brother of man; he is his mirror and his support.",
+    const navMenu =
+        document.getElementById("navMenu");
 
-      "contact.title": "Contact",
-      "contact.text": "For inquiries, collaborations, or more information about Imam Musa al-Sadr, please reach out via email.",
+    const langToggle =
+        document.getElementById("langToggle");
 
-      "footer.copy": "© 2025 Tribute site for educational purposes.",
+    const themeToggle =
+        document.getElementById("themeToggle");
 
-      "aside.title": "At a Glance",
-      "aside.i1": "Born 1928 – Qom, Iran (Lebanese descent)",
-      "aside.i2": "Moved to Tyre, Lebanon in 1959",
-      "aside.i3": "First President of the Supreme Islamic Shi’a Council",
-      "aside.i4": "Founded the Amal Movement",
-      "aside.i5": "Disappeared in Libya, 31 Aug 1978",
+    const preloader =
+        document.getElementById("preloader");
 
-      "timeline.title": "Timeline",
-      "timeline.e1": "Born in Qom to a scholarly family rooted in Jabal Amel, Lebanon.",
-      "timeline.e2": "Settled in Tyre, Lebanon; launched wide social and educational initiatives.",
-      "timeline.e3": "Elected President of the Supreme Islamic Shi’a Council in Lebanon.",
-      "timeline.e4": "Helped found the Amal Movement amid rising challenges.",
-      "timeline.e5": "Traveled to Libya; disappeared with Sheikh Mohammad Yaacoub and journalist Abbas Badreddine.",
+    const scrollProgress =
+        document.getElementById("scrollProgress");
 
-      "quotes.title": "Selected Quotes",
-      "q.1": "Religion without justice is a shell; justice without mercy is a wound.",
-      "q.2": "Our unity is our strength; it protects the weak and restrains the strong.",
-      "q.3": "Knowledge lights the way, but service leads us to the destination.",
-      "q.4": "The duty of the state is to protect dignity; the duty of the citizen is to build.",
+    const backTop =
+        document.getElementById("backTop");
 
-      /* Books */
-      "books.title": "Books",
-      "books.subtitle": "Selected works and resources.",
-      "books.disclaimer": "Note: some links open publisher pages or previews where the PDF may require purchase or a request.",
-      "books.btn": "Download",
+    const year =
+        document.getElementById("year");
 
-      "book.islam_society": "Islam & Society — Musa al-Sadr",
-      "book.ahadith_sahr": "Ahadith al-Sihr — Musa al-Sadr",
-      "book.abc_dialogue": "Alphabet of Dialogue — Musa al-Sadr",
-      "book.islam_20th": "Islam & 20th-Century Culture — Musa al-Sadr",
-      "book.vanished": "The Vanished Imam — Fouad Ajami (about Musa al-Sadr)"
-    },
 
-    ar: {
-      "nav.about": "عنه",
-      "nav.life": "الحياة",
-      "nav.legacy": "الإرث",
-      "nav.contact": "تواصل",
-      "nav.gallery": "المعرض",
-      "nav.timeline": "الخط الزمني",
-      "nav.resources": "المصادر",
-      "nav.quotes": "الاقوال",
+    /* =====================================================
+       UTILITIES
+    ====================================================== */
 
-      "hero.title": "الإمام السيد موسى الصدر",
-      "hero.subtitle": "قائد رؤيوي، مصلح ومفكر.",
+    const prefersReducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
-      "about.title": "عنه",
-      "about.p1": "كان السيد موسى الصدر (1928 - غير معروف) رجل دين شيعي لبناني ومثقف عام. انتقل إلى لبنان في عام 1959، وثم أصبح صوتا رائدا للوحدة الوطنية والتعليم والتنمية الاجتماعية، وخاصة في الجنوب المهمش تاريخيا.",
-      "about.p2": "قاد المؤسسات المجتمعية، ودعا إلى الحوار عبر التقاليد الدينية، وعمل على تعزيز دور الدولة في توفير الكرامة والفرص لجميع المواطنين.",
-      "about.p3": "ا يزال اختفاه غير المبرر في ليبيا في 31 أغسطس 1978، مع الشيخ محمد يعقوب والصحفي عباس بدر الدين، مسألة مركزية لم تحل في تاريخ لبنان الحديث.",
-      "about.text": "السيد موسى الصدر كان رجل دين شيعياً بارزاً ومصلحاً وقائداً سياسياً لعب دوراً أساسياً في تاريخ لبنان الحديث.",
-      "about.card1.t": "عالم ومصلح",
-      "about.card1.d": "الجمع بين المنح الدراسية الدينية والعمل المدني: التعليم والرعاية الصحية والتضامن الاجتماعي.",
-      "about.card2.t": "بناء الجسور",
-      "about.card2.d": "تعزيز الحوار بين الطوائف والمؤسسات اللبنانية لتعزيز الوحدة الوطنية.",
-      "about.card3.t": "سؤال دائم",
-      "about.card3.d": "لا يزال مصيره مجهولا؛ يستمر البحث عن الحقيقة كجزء من الضمير العام.",
+    const finePointer =
+        window.matchMedia(
+            "(pointer: fine)"
+        ).matches;
 
-      "life.title": "الحياة",
-      "life.text": "ولد في مدينة قم الإيرانية عام 1928 وانتقل إلى لبنان عام 1959 حيث أصبح شخصية مؤثرة تدعو إلى العدالة الاجتماعية والوحدة.",
 
-      "legacy.title": "الإرث",
-      "legacy.text": "لا يزال اختفاؤه الغامض عام 1978 في ليبيا أحد أكبر الألغاز في الشرق الأوسط، لكن إرثه ما زال يلهم الأجيال.",
-      "legacy.i1": "نموذج للإيمان يشارك في الحياة العامة: الكرامة والتعليم والعدالة الاجتماعية.",
-      "legacy.i2": "المؤسسات والحركات التي تستمر في تشكيل المشاركة المدنية.",
-      "legacy.i3": "دعوة دائمة للحوار والمواطنة المسؤولة.",
-      "legacy.quote": "لإنسان هو شقيق الإنسان؛ إنه مرآته ودعمه",
+    /* =====================================================
+       YEAR
+    ====================================================== */
 
-      "contact.title": "تواصل معنا",
-      "contact.text": "للاستفسارات أو التعاون أو لمزيد من المعلومات عن الإمام موسى الصدر، يرجى التواصل عبر البريد الإلكتروني.",
+    if (year) {
 
-      "footer.copy": "© ٢٠٢٥ موقع تكريمي لأغراض تعليمية.",
+        year.textContent =
+            new Date().getFullYear();
 
-      "aside.title": "في لمحة",
-      "aside.i1": "ولد عام 1928-قم،ايران(النسب لبناني)",
-      "aside.i2": "انتقل الى صور، لبنان عام 1959",
-      "aside.i3": "الرئيس الاول للمجلس الاسلامي الشيعي الاعلى",
-      "aside.i4": "اسس حركة امل",
-      "aside.i5": "اختفى في ليبيا في 31 آب 1978",
-
-      "timeline.title": "الخط الزمني",
-      "timeline.e1": "ولد في قم لعائلة علمية متجذرة في جبل أمل اللبناني.",
-      "timeline.e2": "يستقر في صور، لبنان؛ يطلق مبادرات اجتماعية وتعليمية واسعة النطاق.",
-      "timeline.e3": "انتخب رئيسا للمجلس الشيعي الإسلامي الأعلى في لبنان.",
-      "timeline.e4": "يساعد في العثور على حركة أمل وسط تزايد التحديات الأمنية والاجتماعية.",
-      "timeline.e5": "يسافر إلى ليبيا؛ يختفي مع الشيخ محمد يعقوب والصحفي عباس بدر الدين.",
-
-      "quotes.title": "اقوال مقتبسة",
-      "q.1": "الدين بدون عدالة هو قشرة؛ والعدالة بدون رحمة هي جرح.",
-      "q.2": "وحدتنا هي قوتنا؛ إنها تحمي الضعفاء وتقيد الأقوياء.",
-      "q.3": "المعرفة تضيء الطريق، لكن الخدمة تقودنا إلى الوجهة",
-      "q.4": "واجب الدولة هو حماية الكرامة؛ واجب المواطن هو بناء",
-
-      /* Books (AR) */
-      "books.title": "الكتب",
-      "books.subtitle": "أعمال وموارد مختارة.",
-      "books.disclaimer": "ملاحظة: بعض الروابط تقود إلى صفحات دور النشر أو معاينات قد تتطلب شراءً أو طلبًا للحصول على الملف.",
-      "books.btn": "تحميل",
-
-      "book.islam_society": "الإسلام والمجتمع — موسى الصدر",
-      "book.ahadith_sahr": "أحاديث السحر — موسى الصدر",
-      "book.abc_dialogue": "أبجدية الحوار — موسى الصدر",
-      "book.islam_20th": "الإسلام وثقافة القرن العشرين — موسى الصدر",
-      "book.vanished": "The Vanished Imam — Fouad Ajami (كتاب عن موسى الصدر)"
     }
-  };
 
-  let currentLang = "en"; // default language
 
-  function switchLanguage(lang) {
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      if (i18n[lang] && i18n[lang][key]) {
-        el.textContent = i18n[lang][key];
-      }
-    });
-    currentLang = lang;
-    // Update button label
-    langToggle.textContent = lang === "en" ? "AR" : "EN";
-    // set html lang + direction for proper layout
-    document.documentElement.setAttribute('lang', lang);
-    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-  }
+    /* =====================================================
+       PRELOADER
+    ====================================================== */
 
-  if (langToggle) {
-    langToggle.addEventListener("click", () => {
-      switchLanguage(currentLang === "en" ? "ar" : "en");
-    });
-  }
+    window.addEventListener(
+        "load",
+        () => {
 
-  // Initialize the language strings on load
-  switchLanguage(currentLang);
+            const delay =
+                prefersReducedMotion
+                    ? 0
+                    : 500;
 
-  // ===============================
-  // Smooth Scroll
-  // ===============================
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const el = document.querySelector(this.getAttribute("href"));
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    });
-  });
+            setTimeout(() => {
 
-  // ===============================
-  // Download buttons: support multiple .site-dl-btn instances
-  // ===============================
-  (function initDownloadButtons(){
-    const buttons = Array.from(document.querySelectorAll('.site-dl-btn'));
-    buttons.forEach(setupButton);
+                preloader?.classList.add(
+                    "loaded"
+                );
 
-    function setupButton(btn){
-      // per-button state
-      const progressLayer = btn.querySelector('.progress');
-      const percentLabel = btn.querySelector('.percent');
-      const confettiLayer = btn.querySelector('.confetti');
-      const labelEl = btn.querySelector('.label');
-      let state = 'idle';
-      let pct = 0;
-      let rafId = null;
-      const href = btn.dataset.href || btn.getAttribute('data-href') || null;
+                document.body.classList.add(
+                    "page-ready"
+                );
 
-      function setState(next){
-        state = next;
-        btn.dataset.state = next;
-        if(next === 'idle'){
-          btn.disabled = false;
-          btn.setAttribute('aria-label', (i18n[currentLang] && i18n[currentLang]['books.btn']) ? i18n[currentLang]['books.btn'] : 'Download');
-          setPct(0);
+            }, delay);
+
+        },
+        {
+            once: true
         }
-        if(next === 'loading'){
-          btn.disabled = true;
-          btn.setAttribute('aria-label', 'Downloading…');
+    );
+
+
+    /* =====================================================
+       MOBILE NAVIGATION
+    ====================================================== */
+
+    function closeMenu() {
+
+        navToggle?.classList.remove(
+            "active"
+        );
+
+        navMenu?.classList.remove(
+            "open"
+        );
+
+        navToggle?.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        body.classList.remove(
+            "menu-open"
+        );
+
+    }
+
+
+    function openMenu() {
+
+        navToggle?.classList.add(
+            "active"
+        );
+
+        navMenu?.classList.add(
+            "open"
+        );
+
+        navToggle?.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+        body.classList.add(
+            "menu-open"
+        );
+
+    }
+
+
+    navToggle?.addEventListener(
+        "click",
+        () => {
+
+            const isOpen =
+                navMenu?.classList.contains(
+                    "open"
+                );
+
+            if (isOpen) {
+
+                closeMenu();
+
+            } else {
+
+                openMenu();
+
+            }
+
         }
-        if(next === 'done'){
-          btn.disabled = false;
-          btn.setAttribute('aria-label', 'Download complete');
-          burstConfetti();
+    );
+
+
+    navMenu?.querySelectorAll("a")
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                closeMenu
+            );
+
+        });
+
+
+    /* =====================================================
+       HEADER STATE
+    ====================================================== */
+
+    function updateHeader() {
+
+        const scroll =
+            window.scrollY;
+
+        header?.classList.toggle(
+            "scrolled",
+            scroll > 35
+        );
+
+        backTop?.classList.toggle(
+            "show",
+            scroll > 700
+        );
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateHeader,
+        {
+            passive: true
         }
-      }
+    );
 
-      function setPct(n){
-        pct = Math.max(0, Math.min(100, Math.floor(n)));
-        // write to CSS variable for visual progress
-        progressLayer.style.setProperty('--pct', pct);
-        if(percentLabel) percentLabel.textContent = pct + '%';
-      }
+    updateHeader();
 
-      function startFakeDownload(){
-        if(state !== 'idle') return;
-        setState('loading');
-        let t = 0;
-        const start = performance.now();
 
-        function step(now){
-          const elapsed = (now - start) / 1000;
-          // easing curve + jitter
-          const eased = 100 * Math.min(1, 1 - Math.exp(-1.4 * elapsed)) * (0.98 + Math.random()*0.02);
-          const target = Math.min(98, eased);
-          t = Math.max(t, target);
-          setPct(t);
-          // finish after ~2.2–3.0s
-          if (elapsed > 2.4 + Math.random()*0.6) {
-            finish();
+    /* =====================================================
+       SCROLL PROGRESS
+    ====================================================== */
+
+    function updateScrollProgress() {
+
+        const scrollTop =
+            window.scrollY;
+
+        const scrollHeight =
+            document.documentElement.scrollHeight -
+            window.innerHeight;
+
+        const progress =
+            scrollHeight > 0
+                ? (scrollTop / scrollHeight) * 100
+                : 0;
+
+        if (scrollProgress) {
+
+            scrollProgress.style.width =
+                `${Math.min(progress, 100)}%`;
+
+        }
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateScrollProgress,
+        {
+            passive: true
+        }
+    );
+
+    updateScrollProgress();
+
+
+    /* =====================================================
+       BACK TO TOP
+    ====================================================== */
+
+    backTop?.addEventListener(
+        "click",
+        () => {
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior:
+                    prefersReducedMotion
+                        ? "auto"
+                        : "smooth"
+
+            });
+
+        }
+    );
+
+
+    /* =====================================================
+       THEME
+    ====================================================== */
+
+    const savedTheme =
+        localStorage.getItem(
+            "musa-theme"
+        );
+
+
+    if (
+        savedTheme === "light"
+    ) {
+
+        body.classList.add(
+            "light-theme"
+        );
+
+    }
+
+
+    themeToggle?.addEventListener(
+        "click",
+        () => {
+
+            body.classList.toggle(
+                "light-theme"
+            );
+
+            const theme =
+                body.classList.contains(
+                    "light-theme"
+                )
+                    ? "light"
+                    : "dark";
+
+            localStorage.setItem(
+                "musa-theme",
+                theme
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       TRANSLATIONS
+    ====================================================== */
+
+    const translations = {
+
+        en: {
+
+            "brand.name":
+                "Musa al-Sadr",
+
+            "brand.tag":
+                "Life • Thought • Legacy",
+
+            "nav.about":
+                "About",
+
+            "nav.timeline":
+                "Timeline",
+
+            "nav.legacy":
+                "Legacy",
+
+            "nav.quotes":
+                "Thought",
+
+            "nav.gallery":
+                "Archive",
+
+            "nav.books":
+                "Library",
+
+            "hero.eyebrow":
+                "A LIFE THAT LEFT A MARK",
+
+            "hero.titleLine1":
+                "Imam",
+
+            "hero.titleLine2":
+                "Musa al-Sadr",
+
+            "hero.description":
+                "Scholar. Reformer. Humanitarian. A voice for dignity, dialogue and social justice whose influence continues to resonate across Lebanon and beyond.",
+
+            "hero.discover":
+                "Explore his life",
+
+            "hero.timeline":
+                "Explore timeline",
+
+            "hero.figure":
+                "A FIGURE OF MODERN LEBANON",
+
+            "hero.scroll":
+                "SCROLL TO EXPLORE",
+
+            "facts.birth":
+                "Born in Qom",
+
+            "facts.lebanon":
+                "Arrived in Lebanon",
+
+            "facts.disappearance":
+                "Disappeared in Libya",
+
+            statement:
+                "His story is not only the story of a religious scholar or political figure. It is the story of a man who sought to turn faith into service, knowledge into action, and difference into dialogue.",
+
+            "about.kicker":
+                "THE MAN",
+
+            "about.title":
+                "Beyond the public figure.",
+
+            "about.p1":
+                "Sayyid Musa al-Sadr was a Lebanese Shi'a cleric, intellectual and reformer who arrived in Lebanon in 1959 and quickly became one of the most influential voices in the country's public life.",
+
+            "about.p2":
+                "His work extended far beyond religious scholarship. He championed education, social development, healthcare, interfaith dialogue and the dignity of communities that had long remained marginalized.",
+
+            "about.p3":
+                "On 31 August 1978, Musa al-Sadr disappeared in Libya alongside Sheikh Muhammad Yaacoub and journalist Abbas Badreddine. Their fate remains unresolved.",
+
+            "about.signature":
+                "A legacy measured in people, not monuments.",
+
+            "about.card1.title":
+                "Scholar & Reformer",
+
+            "about.card1.text":
+                "Religious scholarship transformed into civic responsibility and social action.",
+
+            "about.card2.title":
+                "Bridge Builder",
+
+            "about.card2.text":
+                "Dialogue across communities became a central principle of his public mission.",
+
+            "about.card3.title":
+                "An Unanswered Question",
+
+            "about.card3.text":
+                "His disappearance remains one of the enduring unresolved chapters of Lebanon's modern history.",
+
+            "numbers.birth":
+                "Year of birth",
+
+            "numbers.lebanon":
+                "Arrival in Lebanon",
+
+            "numbers.council":
+                "Supreme Islamic Shiite Council",
+
+            "numbers.amal":
+                "Amal Movement",
+
+            "timeline.kicker":
+                "THE JOURNEY",
+
+            "timeline.title":
+                "A life in motion.",
+
+            "timeline.intro":
+                "From Qom to Tyre, from scholarship to social action, his journey unfolded across decades of extraordinary change.",
+
+            "timeline.e1.title":
+                "The beginning",
+
+            "timeline.e1.text":
+                "Born in Qom into a distinguished scholarly family with deep roots in Jabal Amel, Lebanon.",
+
+            "timeline.e2.title":
+                "A new mission",
+
+            "timeline.e2.text":
+                "He settles in Tyre and begins a broad programme of social, educational and institutional development.",
+
+            "timeline.e3.title":
+                "National leadership",
+
+            "timeline.e3.text":
+                "He becomes the first president of the Supreme Islamic Shiite Council in Lebanon.",
+
+            "timeline.e4.title":
+                "Organising a community",
+
+            "timeline.e4.text":
+                "He helps establish the Amal Movement amid growing social and security challenges.",
+
+            "timeline.e5.title":
+                "The disappearance",
+
+            "timeline.e5.text":
+                "Musa al-Sadr travels to Libya and disappears on 31 August alongside Sheikh Muhammad Yaacoub and journalist Abbas Badreddine.",
+
+            "timeline.unresolved":
+                "His fate remains unresolved.",
+
+            "legacy.kicker":
+                "THE LEGACY",
+
+            "legacy.title":
+                "Faith translated into service.",
+
+            "legacy.card1.title":
+                "Dignity",
+
+            "legacy.card1.text":
+                "A conviction that every person deserves dignity, opportunity and a meaningful place in society.",
+
+            "legacy.card2.title":
+                "Dialogue",
+
+            "legacy.card2.text":
+                "An enduring commitment to communication between Lebanon's religious and social communities.",
+
+            "legacy.card3.title":
+                "Service",
+
+            "legacy.card3.text":
+                "Scholarship was never separated from responsibility toward the wider community.",
+
+            "quotes.kicker":
+                "HIS THOUGHT",
+
+            "quote.1":
+                "Man is the brother of man; he is his mirror and his support.",
+
+            "quote.2":
+                "Religion must remain connected to the dignity and reality of human life.",
+
+            "quote.3":
+                "Dialogue does not erase differences; it teaches us how to live with them.",
+
+            "quote.4":
+                "Knowledge becomes meaningful when it becomes service.",
+
+            "gallery.kicker":
+                "THE ARCHIVE",
+
+            "gallery.title":
+                "Fragments of a memory.",
+
+            "gallery.intro":
+                "A visual collection preserving moments, symbols and the atmosphere surrounding his life and work.",
+
+            "books.kicker":
+                "THE LIBRARY",
+
+            "books.title":
+                "Read the ideas.",
+
+            "books.subtitle":
+                "Selected works, publications and resources related to Musa al-Sadr and his intellectual legacy.",
+
+            "books.open":
+                "Open",
+
+            "books.note":
+                "External resources may have their own access, copyright and availability conditions.",
+
+            "book.resource":
+                "External resource",
+
+            "book.preview":
+                "Publisher preview",
+
+            "book.1.title":
+                "Islam & Society — Musa al-Sadr",
+
+            "book.2.title":
+                "أحاديث السحر — موسى الصدر",
+
+            "book.3.title":
+                "أبجدية الحوار — موسى الصدر",
+
+            "book.4.title":
+                "الإسلام وثقافة القرن العشرين",
+
+            "book.5.title":
+                "The Vanished Imam — Fouad Ajami",
+
+            "final.kicker":
+                "A STORY THAT CONTINUES",
+
+            "final.title":
+                "Remember the man. Continue the conversation.",
+
+            "final.button":
+                "Return to beginning",
+
+            "footer.tag":
+                "Life • Thought • Legacy",
+
+            "footer.copy":
+                "Tribute site for educational purposes.",
+
+            "footer.developed":
+                "Designed & developed by Jawad Dabbous"
+
+        },
+
+
+        ar: {
+
+            "brand.name":
+                "موسى الصدر",
+
+            "brand.tag":
+                "الحياة • الفكر • الإرث",
+
+            "nav.about":
+                "عنه",
+
+            "nav.timeline":
+                "الخط الزمني",
+
+            "nav.legacy":
+                "الإرث",
+
+            "nav.quotes":
+                "الفكر",
+
+            "nav.gallery":
+                "الأرشيف",
+
+            "nav.books":
+                "المكتبة",
+
+            "hero.eyebrow":
+                "حياة تركت أثراً",
+
+            "hero.titleLine1":
+                "الإمام",
+
+            "hero.titleLine2":
+                "موسى الصدر",
+
+            "hero.description":
+                "عالم ومصلح وإنساني. صوت للكرامة والحوار والعدالة الاجتماعية، ولا يزال أثره حاضراً في لبنان وخارجه.",
+
+            "hero.discover":
+                "اكتشف حياته",
+
+            "hero.timeline":
+                "استكشف الخط الزمني",
+
+            "hero.figure":
+                "شخصية من لبنان الحديث",
+
+            "hero.scroll":
+                "مرر للاستكشاف",
+
+            "facts.birth":
+                "ولد في قم",
+
+            "facts.lebanon":
+                "وصل إلى لبنان",
+
+            "facts.disappearance":
+                "اختفى في ليبيا",
+
+            statement:
+                "ليست قصته قصة عالم دين أو شخصية سياسية فحسب، بل قصة رجل سعى إلى تحويل الإيمان إلى خدمة، والمعرفة إلى عمل، والاختلاف إلى حوار.",
+
+            "about.kicker":
+                "الإنسان",
+
+            "about.title":
+                "أبعد من الشخصية العامة.",
+
+            "about.p1":
+                "كان السيد موسى الصدر رجل دين ومفكراً ومصلحاً لبنانياً، وصل إلى لبنان عام 1959 وسرعان ما أصبح أحد أبرز الأصوات تأثيراً في الحياة العامة اللبنانية.",
+
+            "about.p2":
+                "تجاوز عمله حدود الدراسة الدينية، فاهتم بالتعليم والتنمية الاجتماعية والرعاية الصحية والحوار بين الأديان وكرامة المجتمعات التي عانت من التهميش.",
+
+            "about.p3":
+                "في 31 آب 1978 اختفى الإمام موسى الصدر في ليبيا إلى جانب الشيخ محمد يعقوب والصحفي عباس بدر الدين، ولا يزال مصيرهم مجهولاً.",
+
+            "about.signature":
+                "إرث يُقاس بالإنسان، لا بالنصب.",
+
+            "about.card1.title":
+                "عالم ومصلح",
+
+            "about.card1.text":
+                "حوّل العلم الديني إلى مسؤولية مدنية وعمل اجتماعي.",
+
+            "about.card2.title":
+                "باني الجسور",
+
+            "about.card2.text":
+                "كان الحوار بين المجتمعات أحد المحاور الأساسية في رسالته العامة.",
+
+            "about.card3.title":
+                "سؤال بلا جواب",
+
+            "about.card3.text":
+                "لا يزال اختفاؤه أحد الفصول المفتوحة في تاريخ لبنان الحديث.",
+
+            "numbers.birth":
+                "سنة الولادة",
+
+            "numbers.lebanon":
+                "الوصول إلى لبنان",
+
+            "numbers.council":
+                "المجلس الإسلامي الشيعي الأعلى",
+
+            "numbers.amal":
+                "حركة أمل",
+
+            "timeline.kicker":
+                "الرحلة",
+
+            "timeline.title":
+                "حياة في حركة.",
+
+            "timeline.intro":
+                "من قم إلى صور، ومن الدراسة إلى العمل الاجتماعي، امتدت رحلته عبر عقود حافلة بالتغيرات.",
+
+            "timeline.e1.title":
+                "البداية",
+
+            "timeline.e1.text":
+                "ولد في قم لعائلة علمية عريقة ذات جذور في جبل عامل في لبنان.",
+
+            "timeline.e2.title":
+                "مهمة جديدة",
+
+            "timeline.e2.text":
+                "استقر في صور وبدأ برنامجاً واسعاً من المبادرات الاجتماعية والتعليمية والمؤسساتية.",
+
+            "timeline.e3.title":
+                "القيادة الوطنية",
+
+            "timeline.e3.text":
+                "أصبح أول رئيس للمجلس الإسلامي الشيعي الأعلى في لبنان.",
+
+            "timeline.e4.title":
+                "تنظيم المجتمع",
+
+            "timeline.e4.text":
+                "ساهم في تأسيس حركة أمل وسط تحديات اجتماعية وأمنية متزايدة.",
+
+            "timeline.e5.title":
+                "الاختفاء",
+
+            "timeline.e5.text":
+                "سافر الإمام موسى الصدر إلى ليبيا واختفى في 31 آب مع الشيخ محمد يعقوب والصحفي عباس بدر الدين.",
+
+            "timeline.unresolved":
+                "لا يزال مصيره مجهولاً.",
+
+            "legacy.kicker":
+                "الإرث",
+
+            "legacy.title":
+                "إيمان تُرجم إلى خدمة.",
+
+            "legacy.card1.title":
+                "الكرامة",
+
+            "legacy.card1.text":
+                "إيمان بأن لكل إنسان حقاً في الكرامة والفرصة والمكانة الحقيقية في المجتمع.",
+
+            "legacy.card2.title":
+                "الحوار",
+
+            "legacy.card2.text":
+                "التزام دائم بالتواصل بين الطوائف والمجتمعات اللبنانية.",
+
+            "legacy.card3.title":
+                "الخدمة",
+
+            "legacy.card3.text":
+                "لم يفصل العلم عن المسؤولية تجاه المجتمع الأوسع.",
+
+            "quotes.kicker":
+                "فكره",
+
+            "quote.1":
+                "الإنسان أخو الإنسان؛ هو مرآته وعونه.",
+
+            "quote.2":
+                "يجب أن يبقى الدين مرتبطاً بكرامة الإنسان وواقعه.",
+
+            "quote.3":
+                "الحوار لا يلغي الاختلاف، بل يعلمنا كيف نعيش معه.",
+
+            "quote.4":
+                "تصبح المعرفة ذات معنى عندما تتحول إلى خدمة.",
+
+            "gallery.kicker":
+                "الأرشيف",
+
+            "gallery.title":
+                "شظايا من الذاكرة.",
+
+            "gallery.intro":
+                "مجموعة بصرية تحفظ لحظات ورموزاً وأجواءً مرتبطة بحياته وعمله.",
+
+            "books.kicker":
+                "المكتبة",
+
+            "books.title":
+                "اقرأ الأفكار.",
+
+            "books.subtitle":
+                "مجموعة مختارة من الأعمال والمنشورات والمصادر المرتبطة بالإمام موسى الصدر وإرثه الفكري.",
+
+            "books.open":
+                "فتح",
+
+            "books.note":
+                "قد تخضع المصادر الخارجية لشروط الوصول وحقوق النشر والتوفر الخاصة بها.",
+
+            "book.resource":
+                "مصدر خارجي",
+
+            "book.preview":
+                "معاينة الناشر",
+
+            "book.1.title":
+                "الإسلام والمجتمع — موسى الصدر",
+
+            "book.2.title":
+                "أحاديث السحر — موسى الصدر",
+
+            "book.3.title":
+                "أبجدية الحوار — موسى الصدر",
+
+            "book.4.title":
+                "الإسلام وثقافة القرن العشرين",
+
+            "book.5.title":
+                "الإمام المغيب — فؤاد عجمي",
+
+            "final.kicker":
+                "قصة مستمرة",
+
+            "final.title":
+                "تذكّر الرجل. واصل الحوار.",
+
+            "final.button":
+                "العودة إلى البداية",
+
+            "footer.tag":
+                "الحياة • الفكر • الإرث",
+
+            "footer.copy":
+                "موقع تكريمي لأغراض تعليمية.",
+
+            "footer.developed":
+                "تصميم وتطوير جواد دبوس"
+
+        }
+
+    };
+
+
+    /* =====================================================
+       LANGUAGE SWITCHER
+    ====================================================== */
+
+    let currentLanguage =
+        localStorage.getItem(
+            "musa-language"
+        ) || "en";
+
+
+    function switchLanguage(language) {
+
+        const dictionary =
+            translations[language];
+
+        if (!dictionary) {
             return;
-          }
-          rafId = requestAnimationFrame(step);
         }
-        rafId = requestAnimationFrame(step);
-      }
 
-      function finish(){
-        if(rafId) cancelAnimationFrame(rafId);
-        const startPct = pct;
-        const dur = 320;
-        const t0 = performance.now();
-        function glide(now){
-          const k = Math.min(1, (now - t0)/dur);
-          const eased = startPct + (100 - startPct) * (1 - Math.pow(1-k, 3));
-          setPct(eased);
-          if(k < 1) requestAnimationFrame(glide);
-          else {
-            setTimeout(()=> {
-              setState('done');
-              // open download/publisher page in a new tab after showing done state
-              if(href){
-                try{
-                  window.open(href, '_blank');
-                }catch(err){
-                  // fallback: set location
-                  window.location.href = href;
+
+        document
+            .querySelectorAll("[data-i18n]")
+            .forEach(element => {
+
+                const key =
+                    element.dataset.i18n;
+
+                if (
+                    Object.prototype
+                        .hasOwnProperty
+                        .call(
+                            dictionary,
+                            key
+                        )
+                ) {
+
+                    element.textContent =
+                        dictionary[key];
+
                 }
-              }
-              // reset after a short delay so users can click again
-              setTimeout(()=> setState('idle'), 1600);
-            }, 80);
-          }
+
+            });
+
+
+        html.setAttribute(
+            "lang",
+            language
+        );
+
+
+        html.setAttribute(
+            "dir",
+            language === "ar"
+                ? "rtl"
+                : "ltr"
+        );
+
+
+        currentLanguage =
+            language;
+
+
+        localStorage.setItem(
+            "musa-language",
+            language
+        );
+
+
+        if (langToggle) {
+
+            langToggle.textContent =
+                language === "en"
+                    ? "AR"
+                    : "EN";
+
         }
-        requestAnimationFrame(glide);
-      }
 
-      function burstConfetti(){
-        const colors = ['#ffffff', '#062012', '#0ae2a3', '#5b8cff', '#c6f7e9'];
-        const count = 12;
-        confettiLayer.innerHTML = '';
-        const rect = btn.getBoundingClientRect();
-        for(let i=0;i<count;i++){
-          const s = document.createElement('span');
-          s.className = 'piece';
-          s.style.left = (8 + Math.random() * (rect.width - 16)) + 'px';
-          s.style.background = colors[i % colors.length];
-          s.style.animationDelay = (Math.random() * 0.18) + 's';
-          s.style.transform = `translateY(-20px) rotate(${Math.random()*120}deg)`;
-          confettiLayer.appendChild(s);
-        }
-      }
-
-      // interactions
-      btn.addEventListener('click', startFakeDownload);
-
-      // init
-      setState('idle');
     }
-  })();
 
-  // ===============================
-  // Small: set current year in footer
-  // ===============================
-  const yel = document.getElementById('year');
-  if(yel) yel.textContent = new Date().getFullYear();
+
+    langToggle?.addEventListener(
+        "click",
+        () => {
+
+            switchLanguage(
+                currentLanguage === "en"
+                    ? "ar"
+                    : "en"
+            );
+
+        }
+    );
+
+
+    switchLanguage(
+        currentLanguage
+    );
+
+
+    /* =====================================================
+       SMOOTH ANCHOR LINKS
+    ====================================================== */
+
+    document
+        .querySelectorAll(
+            'a[href^="#"]'
+        )
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                event => {
+
+                    const targetID =
+                        link.getAttribute(
+                            "href"
+                        );
+
+                    if (
+                        !targetID ||
+                        targetID === "#"
+                    ) {
+                        return;
+                    }
+
+
+                    const target =
+                        document.querySelector(
+                            targetID
+                        );
+
+                    if (!target) {
+                        return;
+                    }
+
+
+                    event.preventDefault();
+
+
+                    target.scrollIntoView({
+
+                        behavior:
+                            prefersReducedMotion
+                                ? "auto"
+                                : "smooth",
+
+                        block: "start"
+
+                    });
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       REVEAL OBSERVER
+    ====================================================== */
+
+    const revealElements =
+        document.querySelectorAll(
+            ".reveal"
+        );
+
+
+    if (
+        "IntersectionObserver" in window
+    ) {
+
+        const revealObserver =
+            new IntersectionObserver(
+
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target
+                                    .classList
+                                    .add(
+                                        "visible"
+                                    );
+
+                                revealObserver
+                                    .unobserve(
+                                        entry.target
+                                    );
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+                    threshold: .12,
+
+                    rootMargin:
+                        "0px 0px -50px 0px"
+                }
+
+            );
+
+
+        revealElements.forEach(
+            element =>
+                revealObserver.observe(
+                    element
+                )
+        );
+
+    } else {
+
+        revealElements.forEach(
+            element =>
+                element.classList.add(
+                    "visible"
+                )
+        );
+
+    }
+
+
+    /* =====================================================
+       SIGNATURE OBSERVER
+    ====================================================== */
+
+    const signature =
+        document.querySelector(
+            ".about-signature"
+        );
+
+
+    if (
+        signature &&
+        "IntersectionObserver" in window
+    ) {
+
+        const observer =
+            new IntersectionObserver(
+
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                signature
+                                    .classList
+                                    .add(
+                                        "visible"
+                                    );
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+                    threshold: .4
+                }
+
+            );
+
+
+        observer.observe(
+            signature
+        );
+
+    }
+
+
+    /* =====================================================
+       ACTIVE NAVIGATION
+    ====================================================== */
+
+    const sections =
+        document.querySelectorAll(
+            "main section[id]"
+        );
+
+
+    const navLinks =
+        document.querySelectorAll(
+            ".main-nav a"
+        );
+
+
+    if (
+        "IntersectionObserver" in window
+    ) {
+
+        const sectionObserver =
+            new IntersectionObserver(
+
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                const id =
+                                    entry.target.id;
+
+
+                                navLinks.forEach(
+                                    link => {
+
+                                        link.classList.toggle(
+
+                                            "active",
+
+                                            link.getAttribute(
+                                                "href"
+                                            ) ===
+                                            `#${id}`
+
+                                        );
+
+                                    }
+
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+
+                {
+                    rootMargin:
+                        "-40% 0px -50% 0px"
+                }
+
+            );
+
+
+        sections.forEach(
+            section =>
+                sectionObserver.observe(
+                    section
+                )
+        );
+
+    }
+
+
+    /* =====================================================
+       HERO PARTICLES
+    ====================================================== */
+
+    const particleContainer =
+        document.getElementById(
+            "heroParticles"
+        );
+
+
+    if (
+        particleContainer &&
+        !prefersReducedMotion
+    ) {
+
+        const particleCount =
+            window.innerWidth < 700
+                ? 25
+                : 65;
+
+
+        const fragment =
+            document.createDocumentFragment();
+
+
+        for (
+            let i = 0;
+            i < particleCount;
+            i++
+        ) {
+
+            const particle =
+                document.createElement(
+                    "span"
+                );
+
+
+            particle.className =
+                "hero-particle";
+
+
+            particle.style.setProperty(
+                "--x",
+                `${Math.random() * 100}vw`
+            );
+
+
+            particle.style.setProperty(
+                "--drift",
+                `${(
+                    Math.random() - .5
+                ) * 180}px`
+            );
+
+
+            particle.style.setProperty(
+                "--duration",
+                `${8 + Math.random() * 15}s`
+            );
+
+
+            particle.style.animationDelay =
+                `${-Math.random() * 15}s`;
+
+
+            particle.style.opacity =
+                `${.12 + Math.random() * .4}`;
+
+
+            fragment.appendChild(
+                particle
+            );
+
+        }
+
+
+        particleContainer.appendChild(
+            fragment
+        );
+
+    }
+
+
+    /* =====================================================
+       COUNTERS
+    ====================================================== */
+
+    const counters =
+        document.querySelectorAll(
+            ".counter"
+        );
+
+
+    function animateCounter(
+        counter
+    ) {
+
+        const target =
+            Number(
+                counter.dataset.target
+            );
+
+
+        if (
+            prefersReducedMotion
+        ) {
+
+            counter.textContent =
+                target.toString();
+
+            return;
+
+        }
+
+
+        const duration =
+            1500;
+
+        const start =
+            performance.now();
+
+
+        function tick(now) {
+
+            const elapsed =
+                now - start;
+
+
+            const progress =
+                Math.min(
+                    elapsed / duration,
+                    1
+                );
+
+
+            const eased =
+                1 -
+                Math.pow(
+                    1 - progress,
+                    4
+                );
+
+
+            counter.textContent =
+                Math.floor(
+                    eased * target
+                );
+
+
+            if (
+                progress < 1
+            ) {
+
+                requestAnimationFrame(
+                    tick
+                );
+
+            } else {
+
+                counter.textContent =
+                    target.toString();
+
+            }
+
+        }
+
+
+        requestAnimationFrame(
+            tick
+        );
+
+    }
+
+
+    if (
+        "IntersectionObserver" in window
+    ) {
+
+        const counterObserver =
+            new IntersectionObserver(
+
+                entries => {
+
+                    entries.forEach(
+                        entry => {
+
+                            if (
+                                !entry.isIntersecting
+                            ) {
+                                return;
+                            }
+
+
+                            animateCounter(
+                                entry.target
+                            );
+
+
+                            counterObserver
+                                .unobserve(
+                                    entry.target
+                                );
+
+                        }
+                    );
+
+                },
+
+                {
+                    threshold: .6
+                }
+
+            );
+
+
+        counters.forEach(
+            counter =>
+                counterObserver.observe(
+                    counter
+                )
+        );
+
+    }
+
+
+    /* =====================================================
+       TIMELINE PROGRESS
+    ====================================================== */
+
+    const timeline =
+        document.querySelector(
+            ".timeline"
+        );
+
+
+    const timelineProgress =
+        document.querySelector(
+            ".timeline-progress"
+        );
+
+
+    if (
+        timeline &&
+        timelineProgress &&
+        !prefersReducedMotion
+    ) {
+
+        let timelineTicking =
+            false;
+
+
+        function updateTimeline() {
+
+            const rect =
+                timeline.getBoundingClientRect();
+
+
+            const viewport =
+                window.innerHeight;
+
+
+            const start =
+                viewport * .8;
+
+
+            const end =
+                viewport * .2;
+
+
+            const distance =
+                rect.height;
+
+
+            const passed =
+                start - rect.top;
+
+
+            let progress =
+                passed /
+                (
+                    distance -
+                    (start - end)
+                );
+
+
+            progress =
+                Math.max(
+                    0,
+                    Math.min(
+                        1,
+                        progress
+                    )
+                );
+
+
+            timelineProgress.style.height =
+                `${progress * 100}%`;
+
+
+            timelineTicking =
+                false;
+
+        }
+
+
+        window.addEventListener(
+            "scroll",
+            () => {
+
+                if (
+                    !timelineTicking
+                ) {
+
+                    requestAnimationFrame(
+                        updateTimeline
+                    );
+
+                    timelineTicking =
+                        true;
+
+                }
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        updateTimeline();
+
+    } else if (
+        timelineProgress
+    ) {
+
+        timelineProgress.style.height =
+            "100%";
+
+    }
+
+
+    /* =====================================================
+       QUOTE SLIDER
+    ====================================================== */
+
+    const quoteSlides =
+        Array.from(
+            document.querySelectorAll(
+                ".quote-slide"
+            )
+        );
+
+
+    const quotePrev =
+        document.getElementById(
+            "quotePrev"
+        );
+
+
+    const quoteNext =
+        document.getElementById(
+            "quoteNext"
+        );
+
+
+    const quoteProgress =
+        document.getElementById(
+            "quoteProgress"
+        );
+
+
+    let currentQuote =
+        0;
+
+
+    let quoteTimer =
+        null;
+
+
+    function showQuote(index) {
+
+        if (
+            !quoteSlides.length
+        ) {
+            return;
+        }
+
+
+        currentQuote =
+            (
+                index +
+                quoteSlides.length
+            ) %
+            quoteSlides.length;
+
+
+        quoteSlides.forEach(
+            (slide, i) => {
+
+                slide.classList.toggle(
+                    "active",
+                    i === currentQuote
+                );
+
+            }
+        );
+
+
+        if (
+            quoteProgress
+        ) {
+
+            quoteProgress.style.width =
+                `${
+                    (
+                        (
+                            currentQuote + 1
+                        ) /
+                        quoteSlides.length
+                    ) * 100
+                }%`;
+
+        }
+
+    }
+
+
+    function nextQuote() {
+
+        showQuote(
+            currentQuote + 1
+        );
+
+    }
+
+
+    function previousQuote() {
+
+        showQuote(
+            currentQuote - 1
+        );
+
+    }
+
+
+    function restartQuoteTimer() {
+
+        if (
+            prefersReducedMotion
+        ) {
+            return;
+        }
+
+
+        clearInterval(
+            quoteTimer
+        );
+
+
+        quoteTimer =
+            setInterval(
+                nextQuote,
+                7000
+            );
+
+    }
+
+
+    quoteNext?.addEventListener(
+        "click",
+        () => {
+
+            nextQuote();
+
+            restartQuoteTimer();
+
+        }
+    );
+
+
+    quotePrev?.addEventListener(
+        "click",
+        () => {
+
+            previousQuote();
+
+            restartQuoteTimer();
+
+        }
+    );
+
+
+    showQuote(0);
+
+    restartQuoteTimer();
+
+
+    /* =====================================================
+       PAUSE QUOTES WHEN TAB IS HIDDEN
+    ====================================================== */
+
+    document.addEventListener(
+        "visibilitychange",
+        () => {
+
+            if (
+                document.hidden
+            ) {
+
+                clearInterval(
+                    quoteTimer
+                );
+
+            } else {
+
+                restartQuoteTimer();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       GALLERY LIGHTBOX
+    ====================================================== */
+
+    const galleryItems =
+        document.querySelectorAll(
+            ".gallery-item"
+        );
+
+
+    const lightbox =
+        document.getElementById(
+            "lightbox"
+        );
+
+
+    const lightboxImage =
+        document.getElementById(
+            "lightboxImage"
+        );
+
+
+    const lightboxCaption =
+        document.getElementById(
+            "lightboxCaption"
+        );
+
+
+    const lightboxClose =
+        document.getElementById(
+            "lightboxClose"
+        );
+
+
+    function openLightbox(
+        image,
+        caption
+    ) {
+
+        if (
+            !lightbox ||
+            !lightboxImage
+        ) {
+            return;
+        }
+
+
+        lightboxImage.src =
+            image;
+
+
+        lightboxImage.alt =
+            caption;
+
+
+        if (
+            lightboxCaption
+        ) {
+
+            lightboxCaption.textContent =
+                caption;
+
+        }
+
+
+        lightbox.classList.add(
+            "open"
+        );
+
+
+        lightbox.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        body.style.overflow =
+            "hidden";
+
+    }
+
+
+    function closeLightbox() {
+
+        if (
+            !lightbox
+        ) {
+            return;
+        }
+
+
+        lightbox.classList.remove(
+            "open"
+        );
+
+
+        lightbox.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        body.style.overflow =
+            "";
+
+    }
+
+
+    galleryItems.forEach(
+        item => {
+
+            item.addEventListener(
+                "click",
+                () => {
+
+                    openLightbox(
+
+                        item.dataset.image,
+
+                        item.dataset.caption ||
+                            "Archive"
+
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    lightboxClose?.addEventListener(
+        "click",
+        closeLightbox
+    );
+
+
+    lightbox?.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target ===
+                lightbox
+            ) {
+
+                closeLightbox();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       MAGNETIC BUTTONS
+    ====================================================== */
+
+    if (
+        finePointer &&
+        !prefersReducedMotion
+    ) {
+
+        const magneticButtons =
+            document.querySelectorAll(
+                ".magnetic-button"
+            );
+
+
+        magneticButtons.forEach(
+            button => {
+
+                button.addEventListener(
+                    "mousemove",
+                    event => {
+
+                        const rect =
+                            button.getBoundingClientRect();
+
+
+                        const x =
+                            event.clientX -
+                            rect.left;
+
+
+                        const y =
+                            event.clientY -
+                            rect.top;
+
+
+                        const centerX =
+                            rect.width / 2;
+
+
+                        const centerY =
+                            rect.height / 2;
+
+
+                        const moveX =
+                            (
+                                x -
+                                centerX
+                            ) * .12;
+
+
+                        const moveY =
+                            (
+                                y -
+                                centerY
+                            ) * .12;
+
+
+                        button.style.transform =
+                            `translate(
+                                ${moveX}px,
+                                ${moveY}px
+                            )`;
+
+
+                        button.style.setProperty(
+                            "--mx",
+                            `${x}px`
+                        );
+
+
+                        button.style.setProperty(
+                            "--my",
+                            `${y}px`
+                        );
+
+                    }
+                );
+
+
+                button.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        button.style.transform =
+                            "";
+
+                    }
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       CUSTOM CURSOR
+    ====================================================== */
+
+    const cursor =
+        document.getElementById(
+            "cursor"
+        );
+
+
+    const cursorFollower =
+        document.getElementById(
+            "cursorFollower"
+        );
+
+
+    if (
+        cursor &&
+        cursorFollower &&
+        finePointer &&
+        !prefersReducedMotion
+    ) {
+
+        let mouseX =
+            window.innerWidth / 2;
+
+
+        let mouseY =
+            window.innerHeight / 2;
+
+
+        let followerX =
+            mouseX;
+
+
+        let followerY =
+            mouseY;
+
+
+        window.addEventListener(
+            "mousemove",
+            event => {
+
+                mouseX =
+                    event.clientX;
+
+                mouseY =
+                    event.clientY;
+
+
+                cursor.style.left =
+                    `${mouseX}px`;
+
+
+                cursor.style.top =
+                    `${mouseY}px`;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        function animateCursor() {
+
+            followerX +=
+                (
+                    mouseX -
+                    followerX
+                ) * .13;
+
+
+            followerY +=
+                (
+                    mouseY -
+                    followerY
+                ) * .13;
+
+
+            cursorFollower.style.left =
+                `${followerX}px`;
+
+
+            cursorFollower.style.top =
+                `${followerY}px`;
+
+
+            requestAnimationFrame(
+                animateCursor
+            );
+
+        }
+
+
+        animateCursor();
+
+
+        const interactiveElements =
+            document.querySelectorAll(
+                "a, button, .gallery-item"
+            );
+
+
+        interactiveElements.forEach(
+            element => {
+
+                element.addEventListener(
+                    "mouseenter",
+                    () => {
+
+                        body.classList.add(
+                            "cursor-active"
+                        );
+
+                    }
+                );
+
+
+                element.addEventListener(
+                    "mouseleave",
+                    () => {
+
+                        body.classList.remove(
+                            "cursor-active"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       HERO PARALLAX
+    ====================================================== */
+
+    const heroArt =
+        document.querySelector(
+            ".hero-visual"
+        );
+
+
+    const heroGrid =
+        document.querySelector(
+            ".hero-grid"
+        );
+
+
+    if (
+        heroArt &&
+        finePointer &&
+        !prefersReducedMotion
+    ) {
+
+        let raf =
+            null;
+
+
+        let targetX =
+            0;
+
+
+        let targetY =
+            0;
+
+
+        let currentX =
+            0;
+
+
+        let currentY =
+            0;
+
+
+        function renderParallax() {
+
+            currentX +=
+                (
+                    targetX -
+                    currentX
+                ) * .08;
+
+
+            currentY +=
+                (
+                    targetY -
+                    currentY
+                ) * .08;
+
+
+            heroArt.style.transform =
+                `translate3d(
+                    ${currentX * 12}px,
+                    ${currentY * 12}px,
+                    0
+                )`;
+
+
+            if (
+                heroGrid
+            ) {
+
+                heroGrid.style.transform =
+                    `translate3d(
+                        ${currentX * -8}px,
+                        ${currentY * -8}px,
+                        0
+                    )`;
+
+            }
+
+
+            raf =
+                requestAnimationFrame(
+                    renderParallax
+                );
+
+        }
+
+
+        window.addEventListener(
+            "mousemove",
+            event => {
+
+                targetX =
+                    event.clientX /
+                    window.innerWidth -
+                    .5;
+
+
+                targetY =
+                    event.clientY /
+                    window.innerHeight -
+                    .5;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        renderParallax();
+
+    }
+
+
+    /* =====================================================
+       KEYBOARD ACCESSIBILITY
+    ====================================================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeMenu();
+
+                closeLightbox();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       RESIZE
+    ====================================================== */
+
+    let resizeTimer;
+
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            clearTimeout(
+                resizeTimer
+            );
+
+
+            resizeTimer =
+                setTimeout(
+                    () => {
+
+                        if (
+                            window.innerWidth >
+                            760
+                        ) {
+
+                            closeMenu();
+
+                        }
+
+                    },
+                    150
+                );
+
+        }
+    );
+
+
 });
